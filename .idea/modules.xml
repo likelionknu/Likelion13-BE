@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Likelion13-BE.iml" filepath="$PROJECT_DIR$/.idea/Likelion13-BE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jwt.iml" filepath="$PROJECT_DIR$/jwt.iml" />
     </modules>
   </component>
 </project>

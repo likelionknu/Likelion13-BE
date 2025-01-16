@@ -20,7 +20,6 @@ public class Email {
     @Column(name = "email_id", unique = true, nullable = false)
     private Long id;
 
-    // 이메일 주소
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -44,5 +43,13 @@ public class Email {
         this.verificationCode = verificationCode;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
+    }
+
+    @PrePersist
+    @PreUpdate
+    private void addEmailDomain() {
+        if (email != null && !email.contains("@")) {
+            this.email = this.email + "@kangnam.ac.kr";
+        }
     }
 }

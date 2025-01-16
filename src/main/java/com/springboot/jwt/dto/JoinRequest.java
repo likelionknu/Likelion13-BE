@@ -11,20 +11,23 @@ import lombok.Setter;
 @NoArgsConstructor
 public class JoinRequest {
     private String name;
-    private String major;
-    private String schoolNum;
-    private String phoneNum;
+    private String department;
+    private String studentId;
+    private String phone;
     private String email;
     private String password;
     private String passwordCheck;
     private String grade;
 
     public User toEntity(String encodedPassword) {
+        if (this.email != null && !this.email.contains("@")) {
+            this.email = this.email + "@kangnam.ac.kr";
+        }
         return User.builder()
                 .name(this.name)
-                .major(this.major)
-                .schoolNum(this.schoolNum)
-                .phoneNum(this.phoneNum)
+                .major(this.department)
+                .schoolNum(this.studentId)
+                .phoneNum(this.phone)
                 .email(this.email)
                 .password(encodedPassword) // 암호화된 비밀번호 사용
                 .grade(this.grade)
