@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SignController {
     private final UserService userService;
     private final EmailService emailService;
-    private final EmailDto emailDto;
 
     // 인증코드 발송
     @PostMapping("/send")
@@ -43,27 +42,26 @@ public class SignController {
     // 회원가입
     @PostMapping("/sign-up")
     public String join(@RequestBody JoinRequest joinRequest) {
+        if (joinRequest.getEmail() != null && !joinRequest.getEmail().contains("@")) {
+            joinRequest.setEmail(joinRequest.getEmail() + "@kangnam.ac.kr");
+        }
         try {
             // 이메일 중복 체크
             if (userService.checkEmailDuplicate(joinRequest.getEmail())) {
                 return "이메일이 중복됩니다.";
             }
-
             // 학번 중복 체크
-            if (userService.checkSchoolNumDuplicate(joinRequest.getSchoolNum())) {
+            if (userService.checkSchoolNumDuplicate(joinRequest.getStudentId())) {
                 return "학번이 중복됩니다.";
             }
-
             // 전화번호 중복 체크
-            if (userService.checkPhoneNumDuplicate(joinRequest.getPhoneNum())) {
+            if (userService.checkPhoneNumDuplicate(joinRequest.getPhone())) {
                 return "전화번호가 중복됩니다.";
             }
-
             // 비밀번호 확인
             if (!joinRequest.getPassword().equals(joinRequest.getPasswordCheck())) {
                 return "비밀번호가 일치하지 않습니다.";
             }
-
             // 이메일 인증 여부 확인
             if (!userService.isEmailVerified(joinRequest.getEmail())) {
                 return "이메일 인증이 완료되지 않았습니다.";

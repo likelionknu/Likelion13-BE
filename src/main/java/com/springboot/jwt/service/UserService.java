@@ -25,20 +25,19 @@ public class UserService {
     private final EmailService emailService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     // 이메일 중복 확인
     public boolean checkEmailDuplicate(String email) {
         return userRepository.existsByEmail(email);
     }
 
     // 학번 중복 확인
-    public boolean checkSchoolNumDuplicate(String schoolNum) {
-        return userRepository.existsBySchoolNum(schoolNum);
+    public boolean checkSchoolNumDuplicate(String schoolId) {
+        return userRepository.existsBystudentId(schoolId);
     }
 
     // 전화번호 중복 확인
-    public boolean checkPhoneNumDuplicate(String phoneNum) {
-        return userRepository.existsByPhoneNum(phoneNum);
+    public boolean checkPhoneNumDuplicate(String phone) {
+        return userRepository.existsByPhone(phone);
     }
 
     // 이메일 인증 여부 확인
@@ -50,6 +49,9 @@ public class UserService {
     // 회원가입
     @Transactional
     public void join(JoinRequest joinRequest) {
+        if (joinRequest.getEmail() != null && !joinRequest.getEmail().contains("@")) {
+            joinRequest.setEmail(joinRequest.getEmail() + "@kangnam.ac.kr");
+        }
         // 이메일 중복 확인
         if (userRepository.existsByEmail(joinRequest.getEmail())) {
             throw new IllegalArgumentException("이메일이 중복됩니다.");
@@ -60,7 +62,6 @@ public class UserService {
         if (emailVerification.isEmpty() || !emailVerification.get().isVerified()) {
             throw new IllegalArgumentException("이메일 인증이 완료되지 않았습니다.");
         }
-
         // 비밀번호 암호화
         String encodedPassword = bCryptPasswordEncoder.encode(joinRequest.getPassword());
 

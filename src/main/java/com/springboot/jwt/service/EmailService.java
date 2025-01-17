@@ -63,8 +63,21 @@ public class EmailService {
         return templateEngine.process("mail", context);
     }
 
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+        return email.matches(emailRegex);
+    }
+
     // 이메일 폼 생성
     public void sendEmail(String toEmail, String customMessage) throws MessagingException {
+        if (!toEmail.contains("@")) {
+            toEmail = toEmail + "@kangnam.ac.kr"; // 도메인을 추가
+        }
+
+        if (!isValidEmail(toEmail)) {
+            throw new IllegalArgumentException("유효하지 않은 이메일 주소입니다: " + toEmail);
+        }
+
         if (redisUtil.existData(toEmail)) {
             redisUtil.deleteData(toEmail);
         }
@@ -98,6 +111,11 @@ public class EmailService {
 
     @Transactional
     public Boolean verifyEmailCode(String email, String code) {
+
+        if (!email.contains("@")) {
+            email = email + "@kangnam.ac.kr"; // 도메인을 추가
+        }
+
         String codeFoundByEmail = redisUtil.getData(email);
         log.info("code found by email: " + codeFoundByEmail);
         if (codeFoundByEmail == null) {

@@ -28,14 +28,14 @@ public class User implements UserDetails {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "major", nullable = false)
-    private String major;
+    @Column(name = "department", nullable = false)
+    private String department;
 
-    @Column(name = "school_num", nullable = false, unique = true)
-    private String schoolNum;
+    @Column(name = "studentId", nullable = false, unique = true)
+    private String studentId;
 
-    @Column(name = "phone_num", nullable = false)
-    private String phoneNum;
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -54,14 +54,22 @@ public class User implements UserDetails {
     @Builder
     public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified) {
         this.name = name;
-        this.major = major;
-        this.schoolNum = schoolNum;
-        this.phoneNum = phoneNum;
+        this.department = major;
+        this.studentId = schoolNum;
+        this.phone = phoneNum;
         this.email = email;
         this.password = password;
         this.grade = grade;
         this.role = role;
         this.emailVerified = false;
+    }
+
+    @PrePersist
+    @PreUpdate
+    private void addEmailDomain() {
+        if (email != null && !email.contains("@")) {
+            this.email = this.email + "@kangnam.ac.kr";
+        }
     }
 
     // 권한 반환
