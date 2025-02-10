@@ -49,6 +49,7 @@ public class User implements UserDetails {
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified = false;
 
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     @Builder
