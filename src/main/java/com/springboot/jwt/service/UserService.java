@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class UserService {
 
     // 학번 중복 확인
     public boolean checkSchoolNumDuplicate(String schoolId) {
-        return userRepository.existsBystudentId(schoolId);
+        return userRepository.existsByStudentId(schoolId);
     }
 
     // 전화번호 중복 확인
@@ -131,12 +133,35 @@ public class UserService {
 
         return user;
     }
-    // UserService 클래스에 추가
+
+    // 클래스에 추가
     public Optional<User> getLoginUserByLoginId(String loginId) {
         return userRepository.findByEmail(loginId); // 혹은 적절한 필드로 수정
     }
 
     private String generateVerificationCode() {
         return UUID.randomUUID().toString().substring(0, 8); // 8자리 코드 생성
+    }
+
+    @Service
+    public class TokenBlacklistService {
+        private final Set<String> blacklist = new HashSet<>();
+
+        public void addToBlacklist(String token) {
+            blacklist.add(token);
+        }
+
+        public boolean isBlacklisted(String token) {
+            return blacklist.contains(token);
+        }
+    }
+
+    @Transactional
+    public boolean deleteByEmail(String email) {
+        if (!userRepository.existsByEmail(email)) {
+            return false;
+        }
+        userRepository.deleteByEmail(email);
+        return true;
     }
 }
