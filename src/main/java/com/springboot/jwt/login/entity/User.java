@@ -112,4 +112,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true; // true == 사용 가능
     }
+
 }
