@@ -1,8 +1,8 @@
-package com.springboot.jwt.config;
+package com.springboot.jwt.login.config;
 
-import com.springboot.jwt.jwt.JwtTokenFilter;
-import com.springboot.jwt.jwt.JwtTokenUtil;
-import com.springboot.jwt.service.UserService;
+import com.springboot.jwt.login.jwt.JwtTokenFilter;
+import com.springboot.jwt.login.jwt.JwtTokenUtil;
+import com.springboot.jwt.login.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.springboot.jwt.entity;
+package com.springboot.jwt.login.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

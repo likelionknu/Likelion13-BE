@@ -1,7 +1,7 @@
-package com.springboot.jwt.jwt;
+package com.springboot.jwt.login.jwt;
 
-import com.springboot.jwt.entity.User;
-import com.springboot.jwt.service.UserService;
+import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.login.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

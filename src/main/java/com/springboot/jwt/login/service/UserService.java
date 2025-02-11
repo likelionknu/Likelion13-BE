@@ -1,11 +1,11 @@
-package com.springboot.jwt.service;
+package com.springboot.jwt.login.service;
 
-import com.springboot.jwt.dto.JoinRequest;
-import com.springboot.jwt.dto.LoginRequest;
-import com.springboot.jwt.entity.Email;
-import com.springboot.jwt.entity.User;
-import com.springboot.jwt.repository.EmailRepository;
-import com.springboot.jwt.repository.UserRepository;
+import com.springboot.jwt.login.dto.JoinRequest;
+import com.springboot.jwt.login.dto.LoginRequest;
+import com.springboot.jwt.login.entity.Email;
+import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.login.repository.EmailRepository;
+import com.springboot.jwt.login.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,7 +44,7 @@ public class UserService {
 
     // 이메일 인증 여부 확인
     public boolean isEmailVerified(String email) {
-        Optional<com.springboot.jwt.entity.Email> emailOptional = emailRepository.findByEmail(email);
+        Optional<Email> emailOptional = emailRepository.findByEmail(email);
         return emailOptional.isPresent() && emailOptional.get().isVerified();
     }
 

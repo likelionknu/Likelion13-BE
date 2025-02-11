@@ -1,4 +1,4 @@
-package com.springboot.jwt.dto;
+package com.springboot.jwt.login.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

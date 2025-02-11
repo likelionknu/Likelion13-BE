@@ -1,4 +1,4 @@
-package com.springboot.jwt.jwt;
+package com.springboot.jwt.login.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

@@ -1,4 +1,4 @@
-package com.springboot.jwt.config;
+package com.springboot.jwt.login.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

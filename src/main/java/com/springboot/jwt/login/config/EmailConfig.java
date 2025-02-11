@@ -1,4 +1,4 @@
-package com.springboot.jwt.config;
+package com.springboot.jwt.login.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

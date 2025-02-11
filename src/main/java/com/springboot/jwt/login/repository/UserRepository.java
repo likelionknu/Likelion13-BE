@@ -1,6 +1,6 @@
-package com.springboot.jwt.repository;
+package com.springboot.jwt.login.repository;
 
-import com.springboot.jwt.entity.User;
+import com.springboot.jwt.login.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

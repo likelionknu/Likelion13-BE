@@ -1,7 +1,7 @@
-package com.springboot.jwt.service;
+package com.springboot.jwt.login.service;
 
-import com.springboot.jwt.entity.Email;
-import com.springboot.jwt.repository.EmailRepository;
+import com.springboot.jwt.login.entity.Email;
+import com.springboot.jwt.login.repository.EmailRepository;
 import com.springboot.jwt.util.RedisUtil;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
