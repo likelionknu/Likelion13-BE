@@ -24,14 +24,13 @@ public class SecurityConfig {
         httpSecurity
                 .httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용 X
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/**").permitAll()
-                .anyRequest().permitAll() 
+                .requestMatchers("/api/v1/mypage-update").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtTokenFilter(userService, jwtTokenUtil), UsernamePasswordAuthenticationFilter.class);
-
         return httpSecurity.build();
     }
 }

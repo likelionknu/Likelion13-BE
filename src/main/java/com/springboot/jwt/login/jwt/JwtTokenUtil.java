@@ -21,27 +21,23 @@ public class JwtTokenUtil {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // ✅ JWT 생성
     public String createToken(String email, long expireTimeMs) {
         return Jwts.builder()
-                .setSubject(email) // ✅ setSubject() 사용
+                .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expireTimeMs))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // ✅ JWT에서 Email 추출
     public String getLoginId(String token) {
         return extractClaims(token).getSubject();
     }
 
-    // ✅ JWT 만료 여부 확인
     public boolean isExpired(String token) {
         return extractClaims(token).getExpiration().before(new Date());
     }
 
-    // ✅ JWT Claims 추출
     private Claims extractClaims(String token) {
         try {
             return Jwts.parserBuilder()
