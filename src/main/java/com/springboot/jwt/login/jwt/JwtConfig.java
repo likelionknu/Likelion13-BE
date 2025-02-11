@@ -1,4 +1,4 @@
-package com.springboot.jwt.jwt;
+package com.springboot.jwt.login.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

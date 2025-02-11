@@ -1,7 +1,7 @@
-package com.springboot.jwt.service;
+package com.springboot.jwt.login.service;
 
-import com.springboot.jwt.entity.User;
-import com.springboot.jwt.repository.UserRepository;
+import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

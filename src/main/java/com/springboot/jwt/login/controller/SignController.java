@@ -1,12 +1,12 @@
-package com.springboot.jwt.controller;
+package com.springboot.jwt.login.controller;
 
-import com.springboot.jwt.dto.EmailDto;
-import com.springboot.jwt.dto.JoinRequest;
-import com.springboot.jwt.dto.LoginRequest;
-import com.springboot.jwt.entity.User;
-import com.springboot.jwt.jwt.JwtTokenUtil;
-import com.springboot.jwt.service.EmailService;
-import com.springboot.jwt.service.UserService;
+import com.springboot.jwt.login.dto.EmailDto;
+import com.springboot.jwt.login.dto.JoinRequest;
+import com.springboot.jwt.login.dto.LoginRequest;
+import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.login.jwt.JwtTokenUtil;
+import com.springboot.jwt.login.service.EmailService;
+import com.springboot.jwt.login.service.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

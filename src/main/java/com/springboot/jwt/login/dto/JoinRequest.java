@@ -1,7 +1,7 @@
-package com.springboot.jwt.dto;
+package com.springboot.jwt.login.dto;
 
-import com.springboot.jwt.config.UserRole;
-import com.springboot.jwt.entity.User;
+import com.springboot.jwt.login.config.UserRole;
+import com.springboot.jwt.login.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

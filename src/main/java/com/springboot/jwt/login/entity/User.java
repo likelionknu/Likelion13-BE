@@ -1,6 +1,6 @@
-package com.springboot.jwt.entity;
+package com.springboot.jwt.login.entity;
 
-import com.springboot.jwt.config.UserRole;
+import com.springboot.jwt.login.config.UserRole;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
