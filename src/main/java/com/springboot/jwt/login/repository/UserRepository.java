@@ -1,6 +1,7 @@
 package com.springboot.jwt.login.repository;
 
 import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.result.entity.Result;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByPhone(String phone);
     Optional<User> findByEmail(String email);
     void deleteByEmail(String email);
+    Optional<User> findByStudentId(String studentId);
 }

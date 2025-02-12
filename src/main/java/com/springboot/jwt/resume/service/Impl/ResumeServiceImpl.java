@@ -9,6 +9,9 @@ import com.springboot.jwt.login.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional // 🔴 추가: 트랜잭션을 적용하여 DB 변경을 안전하게 처리
 public class ResumeServiceImpl implements ResumeService {
@@ -58,7 +61,8 @@ public class ResumeServiceImpl implements ResumeService {
                         resume.getContent7(),
                         resume.getContent8(),
                         resume.getContent9(),
-                        resume.getContent10()
+                        resume.getContent10(),
+                        resume.isApply()
                 ))
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
     }
@@ -85,5 +89,34 @@ public class ResumeServiceImpl implements ResumeService {
         resume.setContent10(resumeRequestDto.getContent10());
 
         resumeRepository.save(resume);
+    }
+
+    // 특정 상태 지원서 조회 (apply = True 일 시 지원 완료)
+    @Override
+    @Transactional(readOnly = true)
+    public List<ResumeRequestDto> findByApply(boolean apply) {
+        List<Resume> resumes = resumeRepository.findAllByApply(apply);
+        List<ResumeRequestDto> ResumedtoList = resumes.stream()
+                .map(resume -> {
+                    ResumeRequestDto resumeRequestDto = ResumeRequestDto.fromEntity(resume);
+                    return resumeRequestDto;
+                })
+                .collect(Collectors.toList());
+        return ResumedtoList;
+    }
+
+    public ResumeRequestDto updateResumeStatus(Long id, boolean apply) {
+        Resume resume = resumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
+        resume.setApply(apply);
+
+        // user의 apply 상태 변경 (엔티티 간 매핑)
+        User user = resume.getUser();
+        if (user != null) {
+            user.setApply(apply);
+            userRepository.save(user);
+        }
+        resumeRepository.save(resume);
+        return ResumeRequestDto.fromEntity(resume);
     }
 }

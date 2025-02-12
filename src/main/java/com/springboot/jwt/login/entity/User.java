@@ -52,8 +52,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    private boolean apply; // 사용자의 지원 상태
+
     @Builder
-    public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified) {
+    public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified, boolean apply) {
         this.name = name;
         this.department = major;
         this.studentId = schoolNum;
@@ -63,6 +65,7 @@ public class User implements UserDetails {
         this.grade = grade;
         this.role = role;
         this.emailVerified = false;
+        this.apply = false;
     }
 
     @PrePersist
@@ -76,7 +79,7 @@ public class User implements UserDetails {
     // 권한 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("user"));
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
     @Override
@@ -112,5 +115,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true; // true == 사용 가능
     }
+    public void setApply(boolean apply)
+    {
+        this.apply =apply;
+    }
+
 
 }
