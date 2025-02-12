@@ -49,7 +49,17 @@ public class Resume {
     @Column(nullable = false)
     private String content10;
 
-    @OneToOne
+    private boolean apply = false;
+
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)
     private User user;
+
+    public void submit(){
+        this.apply = true;
+        if (this.user != null){
+            this.user.setApply(true);
+        }
+    }
+
 }

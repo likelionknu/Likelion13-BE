@@ -41,4 +41,6 @@ public class RoleChangeController {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
+
+
 }
