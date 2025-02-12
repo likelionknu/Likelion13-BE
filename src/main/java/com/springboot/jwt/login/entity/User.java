@@ -52,6 +52,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(name = "apply", nullable = false)
+    private Boolean apply = false;  // 기본값 false로 설정
+
     @Builder
     public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified) {
         this.name = name;
@@ -63,6 +66,7 @@ public class User implements UserDetails {
         this.grade = grade;
         this.role = role;
         this.emailVerified = false;
+        this.apply = false;
     }
 
     @PrePersist
