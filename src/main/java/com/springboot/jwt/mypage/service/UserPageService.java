@@ -59,16 +59,6 @@ public class UserPageService {
             throw new IllegalArgumentException("비밀번호는 비워둘 수 없습니다.");
         }
 
-        // 학번 중복 확인
-        if (userRepository.existsByStudentId(changeInformationRequest.getStudentId())) {
-            throw new IllegalArgumentException("학번이 중복됩니다.");
-        }
-
-        // 전화번호 중복 확인
-        if (userRepository.existsByPhone(changeInformationRequest.getPhone())) {
-            throw new IllegalArgumentException("전화번호가 중복됩니다.");
-        }
-
         // 유저 정보 갱신
         user.setName(changeInformationRequest.getName());
         user.setDepartment(changeInformationRequest.getDepartment());

@@ -54,6 +54,12 @@ public class UserService {
         if (joinRequest.getEmail() != null && !joinRequest.getEmail().contains("@")) {
             joinRequest.setEmail(joinRequest.getEmail() + "@kangnam.ac.kr");
         }
+
+        // 전화번호 중복 확인
+        if (userRepository.existsByPhone(joinRequest.getPhone())) {
+            throw new IllegalArgumentException("전화번호가 중복됩니다.");
+        }
+
         // 이메일 중복 확인
         if (userRepository.existsByEmail(joinRequest.getEmail())) {
             throw new IllegalArgumentException("이메일이 중복됩니다.");
