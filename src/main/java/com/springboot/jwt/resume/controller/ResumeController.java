@@ -35,4 +35,11 @@ public class ResumeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 상태 변경 (apply = True 이면 제출, 기본값 false)
+    @PutMapping("/submit/{id}")
+    public ResponseEntity<ResumeRequestDto> submitResume(@PathVariable Long id) {
+        ResumeRequestDto updatedResume = resumeService.updateResumeStatus(id, true);
+        return ResponseEntity.ok(updatedResume);
+
+    }
 }

@@ -33,13 +33,6 @@ public class AdminResumeController {
     }
 
 
-    // 상태 변경 (apply = True면 제출)
-    @PutMapping("/admin/submit/{id}")
-    public ResponseEntity<ResumeRequestDto> submitResume(@PathVariable Long id) {
-        ResumeRequestDto updatedResume = resumeService.updateResumeStatus(id, true);
-        return ResponseEntity.ok(updatedResume);
-    }
-
     @PostMapping("/admin/userForm/{id}")
     public ResponseEntity<ResumeRequestDto> showUserResume(@PathVariable Long id) {
         ResumeRequestDto resumeRequestDto = resumeService.getResumeById(id);
