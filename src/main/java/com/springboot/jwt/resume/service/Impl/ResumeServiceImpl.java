@@ -110,7 +110,7 @@ public class ResumeServiceImpl implements ResumeService {
                 .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
         resume.setApply(apply);
 
-        // user의 apply 상태 변경 (엔티티 간 매핑)
+        // user의 apply 상태 변경
         User user = resume.getUser();
         if (user != null) {
             user.setApply(apply);
