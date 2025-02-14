@@ -23,7 +23,7 @@ public class Result {
     private ResultStatus resultStatus;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
 
     // 한줄평
