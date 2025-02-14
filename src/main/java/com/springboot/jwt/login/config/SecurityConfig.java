@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/mypage-update").authenticated()
+                .requestMatchers("api/v1/admin/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtTokenFilter(userService, jwtTokenUtil), UsernamePasswordAuthenticationFilter.class);
