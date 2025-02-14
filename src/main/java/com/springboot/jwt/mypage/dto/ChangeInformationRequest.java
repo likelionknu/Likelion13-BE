@@ -10,11 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChangeInformationRequest {
-    private String name;
     private String department;
-    private String studentId;
-    private String phone;
     private String password;
     private String passwordCheck;
-    private String grade;
 }

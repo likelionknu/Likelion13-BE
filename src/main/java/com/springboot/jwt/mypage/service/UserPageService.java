@@ -30,23 +30,11 @@ public class UserPageService {
     // 유저 마이페이지 정보 수정
     public User changeInformation(User user, ChangeInformationRequest changeInformationRequest) {
         // 유저 정보 업데이트
-        if (changeInformationRequest.getName() == null || changeInformationRequest.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("이름은 비워둘 수 없습니다.");
-        }
         if (changeInformationRequest.getDepartment() == null || changeInformationRequest.getDepartment().trim().isEmpty()) {
             throw new IllegalArgumentException("학부(전공)는 비워둘 수 없습니다.");
         }
-        if (changeInformationRequest.getStudentId() == null || changeInformationRequest.getStudentId().trim().isEmpty()) {
-            throw new IllegalArgumentException("학번은 비워둘 수 없습니다.");
-        }
-        if (changeInformationRequest.getGrade() == null || changeInformationRequest.getGrade().trim().isEmpty()) {
-            throw new IllegalArgumentException("학년은 비워둘 수 없습니다.");
-        }
-        if (changeInformationRequest.getPhone() == null || changeInformationRequest.getPhone().trim().isEmpty()) {
-            throw new IllegalArgumentException("전화번호는 비워둘 수 없습니다.");
-        }
 
-        // 비밀번호가 비어있지 않은지 확인
+        // 비밀번호 변경
         if (changeInformationRequest.getPassword() != null && !changeInformationRequest.getPassword().trim().isEmpty()) {
             // 비밀번호 확인
             if (!changeInformationRequest.getPassword().equals(changeInformationRequest.getPasswordCheck())) {
@@ -57,18 +45,13 @@ public class UserPageService {
             if (bCryptPasswordEncoder.matches(changeInformationRequest.getPassword(), user.getPassword())) {
                 throw new IllegalArgumentException("기존 비밀번호와 같습니다.");
             }
+
             // 새 비밀번호 암호화하여 설정
             user.setPassword(bCryptPasswordEncoder.encode(changeInformationRequest.getPassword()));
-        } else {
-            throw new IllegalArgumentException("비밀번호는 비워둘 수 없습니다.");
         }
 
         // 유저 정보 갱신
-        user.setName(changeInformationRequest.getName());
         user.setDepartment(changeInformationRequest.getDepartment());
-        user.setStudentId(changeInformationRequest.getStudentId());
-        user.setGrade(changeInformationRequest.getGrade());
-        user.setPhone(changeInformationRequest.getPhone());
 
         return userRepository.save(user);
     }
