@@ -4,6 +4,9 @@ import com.springboot.jwt.login.config.UserRole;
 import com.springboot.jwt.login.entity.User;
 import com.springboot.jwt.login.repository.UserRepository;
 import com.springboot.jwt.mypage.dto.ChangeInformationRequest;
+import com.springboot.jwt.mypage.dto.ResultDto;
+import com.springboot.jwt.result.entity.Result;
+import com.springboot.jwt.result.repository.ResultRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +20,7 @@ public class UserPageService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ResultRepository resultRepository;
 
     // 이메일로 사용자 정보 조회
     public Optional<User> getLoginUserByLoginId(String email) {
@@ -76,6 +80,17 @@ public class UserPageService {
 
         user.setRole(newRole); // 권한 변경
         userRepository.save(user);
+    }
+
+    // 유저 합불 조회 (결과보기)
+    public ResultDto getResultByStudent(String StudentId) {
+        User user = userRepository.findByStudentId(StudentId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 학번 유저 찾을 수 없습니다."));
+
+        Result result = resultRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("결과 조회 기간이 아닙니다."));
+
+        return new ResultDto(user.getName(), result.getResultStatus());
     }
 }
 
