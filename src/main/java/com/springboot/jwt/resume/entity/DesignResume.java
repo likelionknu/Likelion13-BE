@@ -10,8 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "resume")
-public class Resume {
+@Table(name = "designresume")
+public class DesignResume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,46 +20,33 @@ public class Resume {
     private String name;
 
     @Column(nullable = false)
-    private String content1;
+    private String designcontent1;
 
     @Column(nullable = false)
-    private String content2;
+    private String designcontent2;
 
     @Column(nullable = false)
-    private String content3;
+    private String designcontent3;
 
     @Column(nullable = false)
-    private String content4;
+    private String designcontent4;
 
     @Column(nullable = false)
-    private String content5;
+    private String designcontent5;
 
     @Column(nullable = false)
-    private String content6;
+    private String designcontent6;
 
     @Column(nullable = false)
-    private String content7;
+    private String designcontent7;
 
     @Column(nullable = false)
-    private String content8;
+    private String designcontent8;
 
     @Column(nullable = false)
-    private String content9;
-
-    @Column(nullable = false)
-    private String content10;
-
-    private boolean apply = false;
+    private String designcontent9;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, unique = true)
+    @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
-
-    public void submit(){
-        this.apply = true;
-        if (this.user != null){
-            this.user.setApply(true);
-        }
-    }
-
 }
