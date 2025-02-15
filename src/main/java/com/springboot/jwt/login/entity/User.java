@@ -1,6 +1,9 @@
 package com.springboot.jwt.login.entity;
 
 import com.springboot.jwt.login.config.UserRole;
+import com.springboot.jwt.resume.entity.BackendResume;
+import com.springboot.jwt.resume.entity.DesignResume;
+import com.springboot.jwt.resume.entity.FrontendResume;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -120,5 +123,13 @@ public class User implements UserDetails {
         this.apply =apply;
     }
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private BackendResume backendResume;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private FrontendResume frontendResume;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private DesignResume designResume;
 
 }

@@ -46,7 +46,7 @@ public class FrontendResume {
     @Column(nullable = false)
     private String frontendcontent9;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
 }
