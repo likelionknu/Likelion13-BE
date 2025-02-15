@@ -1,6 +1,9 @@
 package com.springboot.jwt.login.entity;
 
 import com.springboot.jwt.login.config.UserRole;
+import com.springboot.jwt.resume.entity.BackendResume;
+import com.springboot.jwt.resume.entity.DesignResume;
+import com.springboot.jwt.resume.entity.FrontendResume;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +56,15 @@ public class User implements UserDetails {
     private UserRole role;
 
     private boolean apply; // 사용자의 지원 상태
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private BackendResume backendResume;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private FrontendResume frontendResume;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private DesignResume designResume;
 
     @Builder
     public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified, boolean apply) {
