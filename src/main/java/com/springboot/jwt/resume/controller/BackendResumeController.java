@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/form/backend")
 public class BackendResumeController {
@@ -17,10 +19,20 @@ public class BackendResumeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Void>backendCreateResume(@RequestBody BackendResumeRequestDto backendResumeRequestDto){
-        backendResumeService.backendCreateResume(backendResumeRequestDto);
-        return new ResponseEntity<> (HttpStatus.CREATED);
+    public ResponseEntity<?> backendCreateResume(@RequestBody BackendResumeRequestDto backendResumeRequestDto) {
+        try {
+            backendResumeService.backendCreateResume(backendResumeRequestDto);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(Map.of("message", "지원서가 성공적으로 저장되었습니다."));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", e.getMessage()));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "서버 오류가 발생했습니다."));
+        }
     }
+
 
     @GetMapping("/view")
     public ResponseEntity<BackendResumeRequestDto> viewResume(@RequestParam Long id) {

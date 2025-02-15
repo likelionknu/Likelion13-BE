@@ -9,6 +9,7 @@ import com.springboot.jwt.login.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 @Transactional
 public class BackendResumeServiceImpl implements BackendResumeService {
@@ -23,7 +24,11 @@ public class BackendResumeServiceImpl implements BackendResumeService {
     @Override
     public void backendCreateResume(BackendResumeRequestDto backendResumeRequestDto) {
         User user = userRepository.findByStudentId(backendResumeRequestDto.getStudentId())
-                .orElseThrow(() -> new RuntimeException("해당 사용자(User)를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자(User)를 찾을 수 없습니다."));
+
+        if (user.isApply()) {
+            throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
+        }
 
         BackendResume backendResume = new BackendResume();
         backendResume.setUser(user);
@@ -41,6 +46,7 @@ public class BackendResumeServiceImpl implements BackendResumeService {
 
         backendResumeRepository.save(backendResume);
     }
+
 
     @Override
     public BackendResumeRequestDto backendGetResumeById(Long id) {
