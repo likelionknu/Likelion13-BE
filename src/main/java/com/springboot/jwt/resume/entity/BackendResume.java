@@ -49,7 +49,7 @@ public class BackendResume {
     @Column(nullable = false)
     private String backendcontent10;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
 }

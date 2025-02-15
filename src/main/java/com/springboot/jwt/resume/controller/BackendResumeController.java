@@ -22,13 +22,13 @@ public class BackendResumeController {
         return new ResponseEntity<> (HttpStatus.CREATED);
     }
 
-    @PostMapping("/view")
+    @GetMapping("/view")
     public ResponseEntity<BackendResumeRequestDto> viewResume(@RequestParam Long id) {
         BackendResumeRequestDto backendResumeRequestDto = backendResumeService.backendGetResumeById(id);
         return ResponseEntity.ok(backendResumeRequestDto);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Void>backendUpdateResume(@PathVariable Long id, @RequestBody BackendResumeRequestDto backendResumeRequestDto) {
         backendResumeService.backendUpdateResume(id, backendResumeRequestDto);
         return new ResponseEntity<> (HttpStatus.OK);
