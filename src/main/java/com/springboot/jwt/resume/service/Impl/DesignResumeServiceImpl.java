@@ -23,7 +23,11 @@ public class DesignResumeServiceImpl implements DesignResumeService {
     @Override
     public void designCreateResume(DesignResumeRequestDto designResumeRequestDto) {
         User user = userRepository.findByStudentId(designResumeRequestDto.getStudentId())
-                .orElseThrow(() -> new RuntimeException("해당 사용자(User)를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자(User)를 찾을 수 없습니다."));
+
+        if (user.isApply()) {
+            throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
+        }
 
         DesignResume designResume = new DesignResume();
         designResume.setUser(user);
@@ -40,6 +44,7 @@ public class DesignResumeServiceImpl implements DesignResumeService {
 
         designResumeRepository.save(designResume);
     }
+
 
     @Override
     public DesignResumeRequestDto designGetResumeById(Long id) {

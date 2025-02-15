@@ -23,7 +23,11 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
     @Override
     public void frontendCreateResume(FrontendResumeRequestDto frontendResumeRequestDto) {
         User user = userRepository.findByStudentId(frontendResumeRequestDto.getStudentId())
-                .orElseThrow(() -> new RuntimeException("해당 사용자(User)를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자(User)를 찾을 수 없습니다."));
+
+        if (user.isApply()) {
+            throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
+        }
 
         FrontendResume frontendResume = new FrontendResume();
         frontendResume.setUser(user);
@@ -40,6 +44,7 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
 
         frontendResumeRepository.save(frontendResume);
     }
+
 
     @Override
     public FrontendResumeRequestDto frontendGetResumeById(Long id) {
