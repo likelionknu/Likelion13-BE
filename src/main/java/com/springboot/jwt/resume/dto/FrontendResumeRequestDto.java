@@ -48,7 +48,7 @@ public class FrontendResumeRequestDto {
         }
         FrontendResumeRequestDto frontendResumeRequestDto = FrontendResumeRequestDto.builder()
                 .id(frontendResume.getId())
-                .studentId(frontendResume.getUser() != null ? String.valueOf(frontendResume.getUser().getId()) : null)
+                .studentId(frontendResume.getUser() != null ? String.valueOf(frontendResume.getUser().getStudentId()) : null)
                 .name(frontendResume.getName())
                 .frontendcontent1(frontendResume.getFrontendcontent1())
                 .frontendcontent2(frontendResume.getFrontendcontent2())

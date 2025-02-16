@@ -49,7 +49,7 @@ public class BackendResumeRequestDto {
         }
         BackendResumeRequestDto backendResumeRequestDto = BackendResumeRequestDto.builder()
                 .id(backendResume.getId())
-                .studentId(backendResume.getUser() != null ? String.valueOf(backendResume.getUser().getId()) : null)
+                .studentId(backendResume.getUser() != null ? String.valueOf(backendResume.getUser().getStudentId()) : null)
                 .name(backendResume.getName())
                 .backendcontent1(backendResume.getBackendcontent1())
                 .backendcontent2(backendResume.getBackendcontent2())
