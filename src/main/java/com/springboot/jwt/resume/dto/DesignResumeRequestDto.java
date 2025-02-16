@@ -48,7 +48,7 @@ public class DesignResumeRequestDto {
         }
         DesignResumeRequestDto designResumeRequestDto = DesignResumeRequestDto.builder()
                 .id(designResume.getId())
-                .studentId(designResume.getUser() != null ? String.valueOf(designResume.getUser().getId()) : null)
+                .studentId(designResume.getUser() != null ? String.valueOf(designResume.getUser().getStudentId()) : null)
                 .name(designResume.getName())
                 .designcontent1(designResume.getDesigncontent1())
                 .designcontent2(designResume.getDesigncontent2())
