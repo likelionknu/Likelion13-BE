@@ -6,4 +6,7 @@ public interface DesignResumeService {
     void designCreateResume(DesignResumeRequestDto designResumeRequestDto);
     void designUpdateResume(Long id, DesignResumeRequestDto designResumeRequestDto);
     DesignResumeRequestDto designGetResumeById(Long id);
+
+
+    DesignResumeRequestDto updateResumeStatus(Long id, boolean apply);
 }

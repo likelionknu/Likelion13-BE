@@ -1,6 +1,8 @@
 package com.springboot.jwt.resume.service.Impl;
 
+import com.springboot.jwt.resume.dto.BackendResumeRequestDto;
 import com.springboot.jwt.resume.dto.DesignResumeRequestDto;
+import com.springboot.jwt.resume.entity.BackendResume;
 import com.springboot.jwt.resume.entity.DesignResume;
 import com.springboot.jwt.resume.repository.DesignResumeRepository;
 import com.springboot.jwt.resume.service.DesignResumeService;
@@ -8,6 +10,9 @@ import com.springboot.jwt.login.entity.User;
 import com.springboot.jwt.login.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -61,7 +66,8 @@ public class DesignResumeServiceImpl implements DesignResumeService {
                         designResume.getDesigncontent6(),
                         designResume.getDesigncontent7(),
                         designResume.getDesigncontent8(),
-                        designResume.getDesigncontent9()
+                        designResume.getDesigncontent9(),
+                        designResume.isApply()
                 ))
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
     }
@@ -87,5 +93,32 @@ public class DesignResumeServiceImpl implements DesignResumeService {
         designResume.setDesigncontent9(designResumeRequestDto.getDesigncontent9());
 
         designResumeRepository.save(designResume);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DesignResumeRequestDto> findByApply(boolean apply) {
+        List<DesignResume> designResumes = designResumeRepository.findAllByApply(apply);
+        List<DesignResumeRequestDto> ResumedtoList = designResumes.stream()
+                .map(designResume -> {
+                    DesignResumeRequestDto designResumeRequestDto = DesignResumeRequestDto.fromEntity(designResume);
+                    return designResumeRequestDto;
+                })
+                .collect(Collectors.toList());
+        return ResumedtoList;
+    }
+
+    public DesignResumeRequestDto updateResumeStatus(Long id, boolean apply) {
+        DesignResume designResume = designResumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
+        designResume.setApply(apply);
+
+        // user의 apply 상태 변경
+        User user = designResume.getUser();
+        if (user != null) {
+            user.setApply(apply);
+            userRepository.save(user);
+        }
+        designResumeRepository.save(designResume);
+        return DesignResumeRequestDto.fromEntity(designResume);
     }
 }

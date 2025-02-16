@@ -6,4 +6,6 @@ public interface BackendResumeService {
     void backendCreateResume(BackendResumeRequestDto backendResumeRequestDto);
     void backendUpdateResume(Long id, BackendResumeRequestDto backendresumeRequestDto);
     BackendResumeRequestDto backendGetResumeById(Long id);
+
+    BackendResumeRequestDto updateResumeStatus(Long id, boolean apply);
 }

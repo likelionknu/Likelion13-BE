@@ -47,4 +47,11 @@ public class DesignResumeController {
         designResumeService.designUpdateResume(id, designResumeRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /* 최종 제출 */
+    @PutMapping("/design/submit/{id}")
+    public ResponseEntity<DesignResumeRequestDto> submitResume(@PathVariable Long id) {
+        DesignResumeRequestDto updatedResume = designResumeService.updateResumeStatus(id, true);
+        return ResponseEntity.ok(updatedResume);
+    }
 }

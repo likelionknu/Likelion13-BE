@@ -33,7 +33,6 @@ public class BackendResumeController {
         }
     }
 
-
     @GetMapping("/view")
     public ResponseEntity<BackendResumeRequestDto> viewResume(@RequestParam Long id) {
         BackendResumeRequestDto backendResumeRequestDto = backendResumeService.backendGetResumeById(id);
@@ -44,6 +43,14 @@ public class BackendResumeController {
     public ResponseEntity<Void>backendUpdateResume(@PathVariable Long id, @RequestBody BackendResumeRequestDto backendResumeRequestDto) {
         backendResumeService.backendUpdateResume(id, backendResumeRequestDto);
         return new ResponseEntity<> (HttpStatus.OK);
+
+    }
+
+    /* 최종 제출 */
+    @PutMapping("/backend/submit/{id}")
+    public ResponseEntity<BackendResumeRequestDto> submitResume(@PathVariable Long id) {
+        BackendResumeRequestDto updatedResume = backendResumeService.updateResumeStatus(id, true);
+        return ResponseEntity.ok(updatedResume);
 
     }
 }

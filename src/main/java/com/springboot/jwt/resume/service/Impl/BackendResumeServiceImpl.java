@@ -9,6 +9,8 @@ import com.springboot.jwt.login.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -64,7 +66,8 @@ public class BackendResumeServiceImpl implements BackendResumeService {
                         backendResume.getBackendcontent7(),
                         backendResume.getBackendcontent8(),
                         backendResume.getBackendcontent9(),
-                        backendResume.getBackendcontent10()
+                        backendResume.getBackendcontent10(),
+                        backendResume.isApply()
                 ))
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
     }
@@ -91,5 +94,35 @@ public class BackendResumeServiceImpl implements BackendResumeService {
         backendResume.setBackendcontent10(backendResumeRequestDto.getBackendcontent10());
 
         backendResumeRepository.save(backendResume);
+    }
+
+
+    // 특정 상태 지원서 조회 (apply = True 일 시 지원 완료)
+    //@Override
+    @Transactional(readOnly = true)
+    public List<BackendResumeRequestDto> findByApply(boolean apply) {
+        List<BackendResume> backendResumes = backendResumeRepository.findAllByApply(apply);
+        List<BackendResumeRequestDto> ResumedtoList = backendResumes.stream()
+                .map(backendResume -> {
+                    BackendResumeRequestDto backendResumeRequestDto = BackendResumeRequestDto.fromEntity(backendResume);
+                    return backendResumeRequestDto;
+                })
+                .collect(Collectors.toList());
+        return ResumedtoList;
+    }
+
+    public BackendResumeRequestDto updateResumeStatus(Long id, boolean apply) {
+        BackendResume backendResume = backendResumeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
+        backendResume.setApply(apply);
+
+        // user의 apply 상태 변경
+        User user = backendResume.getUser();
+        if (user != null) {
+            user.setApply(apply);
+            userRepository.save(user);
+        }
+        backendResumeRepository.save(backendResume);
+        return BackendResumeRequestDto.fromEntity(backendResume);
     }
 }

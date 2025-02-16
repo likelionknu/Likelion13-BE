@@ -18,6 +18,7 @@ public class ResumeResponseDto {
     private String content8;
     private String content9;
     private String content10;
+    private boolean apply;
 
     public String getEmail() {
         return email;
@@ -67,7 +68,9 @@ public class ResumeResponseDto {
         return content10;
     }
 
-
+    public boolean getApply(){
+        return apply;
+    }
     public String toString() {
         return "ResumeResponseDto(email=" + this.getEmail() +
                 ", name=" + this.getName() +

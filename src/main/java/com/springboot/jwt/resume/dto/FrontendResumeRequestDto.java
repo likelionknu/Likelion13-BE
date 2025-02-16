@@ -1,11 +1,14 @@
 package com.springboot.jwt.resume.dto;
 
+import com.springboot.jwt.resume.entity.DesignResume;
+import com.springboot.jwt.resume.entity.FrontendResume;
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class FrontendResumeRequestDto {
     private Long id;
     private String studentId;
@@ -19,6 +22,7 @@ public class FrontendResumeRequestDto {
     private String frontendcontent7;
     private String frontendcontent8;
     private String frontendcontent9;
+    private boolean apply;
 
     @Override
     public String toString() {
@@ -36,5 +40,27 @@ public class FrontendResumeRequestDto {
                 ", frontendcontent8=" + frontendcontent8 +
                 ", frontendcontent9=" + frontendcontent9 +
                 ")";
+    }
+
+    public static FrontendResumeRequestDto fromEntity(FrontendResume frontendResume){
+        if (frontendResume == null){
+            return null;
+        }
+        FrontendResumeRequestDto frontendResumeRequestDto = FrontendResumeRequestDto.builder()
+                .id(frontendResume.getId())
+                .studentId(frontendResume.getUser() != null ? String.valueOf(frontendResume.getUser().getId()) : null)
+                .name(frontendResume.getName())
+                .frontendcontent1(frontendResume.getFrontendcontent1())
+                .frontendcontent2(frontendResume.getFrontendcontent2())
+                .frontendcontent3(frontendResume.getFrontendcontent3())
+                .frontendcontent4(frontendResume.getFrontendcontent4())
+                .frontendcontent5(frontendResume.getFrontendcontent5())
+                .frontendcontent6(frontendResume.getFrontendcontent6())
+                .frontendcontent7(frontendResume.getFrontendcontent7())
+                .frontendcontent8(frontendResume.getFrontendcontent8())
+                .frontendcontent9(frontendResume.getFrontendcontent9())
+                .apply(frontendResume.isApply())
+                .build();
+        return frontendResumeRequestDto;
     }
 }
