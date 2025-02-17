@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
-<div style="margin:120px">
-  <div style="margin-bottom: 10px">
-    <h1>인증 코드 메일입니다.</h1>
-    <br/>
-    <h3 style="text-align: center;"> 아래 코드를 사이트에 입력해주십시오</h3>
-  </div>
-  <div style="text-align: center;">
-    <h2 style="color: crimson;" th:text="${code}"></h2>
-  </div>
-  <br/>
+<head>
+  <meta charset="UTF-8">
+  <title>이메일 인증</title>
+</head>
+<body style="background-color: #ffffff; margin: 0 auto; max-width: 600px; padding: 50px 30px; color: #000000; text-align: left;">
+
+<!-- 제목 -->
+<h1 style="font-size: 26px; font-weight: bold; margin-bottom: 15px;">이메일 주소 인증</h1>
+
+<!-- 안내 문구 -->
+<p style="font-size: 14px; opacity: 0.8; line-height: 1.5; font-weight: 400; margin-bottom: 8px;">
+  안녕하세요, <b style="color: #165EE0;">강남대학교 멋쟁이사자처럼</b>입니다.
+</p>
+<p style="font-size: 14px; opacity: 0.8; line-height: 1.5; font-weight: 400; margin-bottom: 8px;">
+  하단의 인증 번호를 입력하여 이메일 인증을 완료하면 정상적으로 서비스를 이용하실 수 있습니다.
+</p>
+<p style="font-size: 14px; opacity: 0.8; line-height: 1.5; font-weight: 400; margin-bottom: 8px;">
+  항상 최선을 다해 노력하는 <b style="color: #165EE0;">강남대학교 멋쟁이사자처럼</b>이 되겠습니다.
+</p>
+<p style="font-size: 14px; opacity: 0.8; line-height: 1.5; font-weight: 400; margin-bottom: 20px;">
+  감사합니다.
+</p>
+
+<!-- 인증 코드 -->
+<div class="code-box" style="margin-top: 20px; padding: 20px; font-size: 22px; font-weight: bold; color: #000000; background-color: #f4f4f4; border-radius: 10px; display: block; width: 80%; text-align: center;">
+  <span th:text="${code}"></span>
 </div>
+
 </body>
 </html>
