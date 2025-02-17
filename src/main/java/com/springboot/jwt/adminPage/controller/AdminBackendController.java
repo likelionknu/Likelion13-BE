@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @PreAuthorize("hasAuthority('ADMIN')")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class AdminBackendController {
 
     private final BackendResumeService backendResumeService;

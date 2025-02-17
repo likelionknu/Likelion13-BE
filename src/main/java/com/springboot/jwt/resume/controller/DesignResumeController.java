@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/form/design")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class DesignResumeController {
     private final DesignResumeService designResumeService;
 

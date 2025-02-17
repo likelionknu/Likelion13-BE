@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/form/backend")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class BackendResumeController {
     private final BackendResumeService backendResumeService;
 

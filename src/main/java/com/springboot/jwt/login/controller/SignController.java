@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = {"http://localhost:3000", "https://likelion13-fe.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class SignController {
     private final UserService userService;
     private final EmailService emailService;
