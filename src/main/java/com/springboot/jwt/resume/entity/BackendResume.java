@@ -1,6 +1,9 @@
 package com.springboot.jwt.resume.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.springboot.jwt.login.entity.User;
+import com.springboot.jwt.result.entity.Result;
+import com.springboot.jwt.result.entity.ResultStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -49,7 +52,20 @@ public class BackendResume {
     @Column(nullable = false)
     private String backendcontent10;
 
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private boolean apply = false;
+    public boolean isApply() {
+        return apply;
+    }
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
+
+    public BackendResume(User user) {
+        this.user = user;
+    }
+
+    public ResultStatus getResultStatus() {
+        return user != null && user.getResult() != null ? user.getResult().getResultStatus() : null;
+    }
 }

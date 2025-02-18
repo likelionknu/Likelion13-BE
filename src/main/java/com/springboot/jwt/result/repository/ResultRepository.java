@@ -1,7 +1,6 @@
 package com.springboot.jwt.result.repository;
 
 import com.springboot.jwt.login.entity.User;
-import com.springboot.jwt.result.dto.response.ResponseUserListDto;
 import com.springboot.jwt.result.entity.Result;
 import org.apache.coyote.Response;
 import org.springframework.data.jpa.repository.JpaRepository;

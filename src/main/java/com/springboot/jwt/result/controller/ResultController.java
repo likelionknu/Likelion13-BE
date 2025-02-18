@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class ResultController {
     private final ResultService resultService;
 

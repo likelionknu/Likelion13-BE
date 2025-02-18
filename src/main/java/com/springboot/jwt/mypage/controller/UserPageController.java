@@ -22,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = {"http://localhost:3000", "https://likelion13-fe.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class UserPageController {
     @Autowired
     private UserPageService userPageService;

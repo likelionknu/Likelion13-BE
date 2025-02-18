@@ -1,6 +1,9 @@
 package com.springboot.jwt.login.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.springboot.jwt.login.config.UserRole;
+import com.springboot.jwt.result.entity.Result;
 import com.springboot.jwt.resume.entity.BackendResume;
 import com.springboot.jwt.resume.entity.DesignResume;
 import com.springboot.jwt.resume.entity.FrontendResume;
@@ -13,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,6 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +61,12 @@ public class User implements UserDetails {
     private UserRole role;
 
     private boolean apply; // 사용자의 지원 상태
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Result result;
+    public Result getResult() {
+        return result;
+    }
 
     @Builder
     public User(String name, String major, String schoolNum, String phoneNum, String email, String password, String grade, UserRole role, boolean emailVerified, boolean apply) {
@@ -118,9 +129,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true; // true == 사용 가능
     }
-    public void setApply(boolean apply)
-    {
-        this.apply =apply;
+    public void setApply(boolean apply){
+        this.apply = apply;
     }
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -131,5 +141,7 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private DesignResume designResume;
+
+
 
 }

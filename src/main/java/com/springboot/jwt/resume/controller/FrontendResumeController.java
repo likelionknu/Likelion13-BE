@@ -1,9 +1,6 @@
 package com.springboot.jwt.resume.controller;
 
-import com.springboot.jwt.resume.dto.BackendResumeRequestDto;
-import com.springboot.jwt.resume.dto.DesignResumeRequestDto;
 import com.springboot.jwt.resume.dto.FrontendResumeRequestDto;
-import com.springboot.jwt.resume.entity.FrontendResume;
 import com.springboot.jwt.resume.service.FrontendResumeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/form/frontend")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class FrontendResumeController {
     private final FrontendResumeService frontendResumeService;
 
@@ -47,5 +45,12 @@ public class FrontendResumeController {
             @RequestBody FrontendResumeRequestDto frontendResumeRequestDto) {
         frontendResumeService.frontendUpdateResume(id, frontendResumeRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /* 최종 제출 */
+    @PutMapping("/frontend/submit/{id}")
+    public ResponseEntity<FrontendResumeRequestDto> submitResume(@PathVariable Long id) {
+        FrontendResumeRequestDto updatedResume = frontendResumeService.updateResumeStatus(id, true);
+        return ResponseEntity.ok(updatedResume);
     }
 }

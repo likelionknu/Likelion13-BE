@@ -17,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
-@CrossOrigin(origins = {"http://localhost:3000", "https://likelion13-fe.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class RoleChangeController {
     private final UserPageService userPageService;
     private final UserRepository userRepository;

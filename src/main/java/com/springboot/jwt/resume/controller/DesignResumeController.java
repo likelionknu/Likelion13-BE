@@ -12,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/form/design")
+@CrossOrigin(origins = {"http://localhost:3000", "https://www.likelionknu.com"})
 public class DesignResumeController {
     private final DesignResumeService designResumeService;
 
@@ -46,5 +47,12 @@ public class DesignResumeController {
             @RequestBody DesignResumeRequestDto designResumeRequestDto) {
         designResumeService.designUpdateResume(id, designResumeRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /* 최종 제출 */
+    @PutMapping("/design/submit/{id}")
+    public ResponseEntity<DesignResumeRequestDto> submitResume(@PathVariable Long id) {
+        DesignResumeRequestDto updatedResume = designResumeService.updateResumeStatus(id, true);
+        return ResponseEntity.ok(updatedResume);
     }
 }

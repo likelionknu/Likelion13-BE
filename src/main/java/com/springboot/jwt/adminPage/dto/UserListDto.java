@@ -1,4 +1,5 @@
-package com.springboot.jwt.result.dto.response;
+package com.springboot.jwt.adminPage.dto;
+
 
 import com.springboot.jwt.result.entity.ResultStatus;
 import lombok.*;
@@ -8,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseUserListDto {
+public class UserListDto {
 
     private String name;
     private String studentId;
