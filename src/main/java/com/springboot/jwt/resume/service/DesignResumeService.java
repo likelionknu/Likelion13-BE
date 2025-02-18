@@ -4,9 +4,8 @@ import com.springboot.jwt.resume.dto.DesignResumeRequestDto;
 
 public interface DesignResumeService {
     void designCreateResume(DesignResumeRequestDto designResumeRequestDto);
-    void designUpdateResume(Long id, DesignResumeRequestDto designResumeRequestDto);
-    DesignResumeRequestDto designGetResumeById(Long id);
+    void designUpdateResume(String studentId, DesignResumeRequestDto designResumeRequestDto);
+    DesignResumeRequestDto designGetResumeById(String studentId);
 
-
-    DesignResumeRequestDto updateResumeStatus(Long id, boolean apply);
+    DesignResumeRequestDto updateResumeStatus(String studentId, boolean apply);
 }

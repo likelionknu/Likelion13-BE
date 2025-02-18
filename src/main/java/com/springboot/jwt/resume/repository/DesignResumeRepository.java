@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DesignResumeRepository extends JpaRepository<DesignResume, Long> {
-    Optional<DesignResume> findById(Long id);
+    //Optional<DesignResume> findByStudentId(String studentId);
     List<DesignResume> findAllByApply(boolean apply);
     Optional<DesignResume> findByUser(User user);
+    Optional<DesignResume> findByUser_StudentId(String studentId);
 }

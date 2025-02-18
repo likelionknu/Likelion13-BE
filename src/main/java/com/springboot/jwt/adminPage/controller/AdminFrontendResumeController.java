@@ -24,9 +24,9 @@ public class AdminFrontendResumeController {
         this.userListService = userListService;
     }
 
-    @GetMapping("/admin/userform/frontend/{id}")
-    public ResponseEntity<FrontendResumeRequestDto> showFrontendResume(@PathVariable Long id){
-        FrontendResumeRequestDto frontendResumeRequestDto = frontendResumeService.frontendGetResumeById(id);
+    @GetMapping("/admin/userform/frontend/{studentId}")
+    public ResponseEntity<FrontendResumeRequestDto> showFrontendResume(@RequestParam String studentId){
+        FrontendResumeRequestDto frontendResumeRequestDto = frontendResumeService.frontendGetResumeById(studentId);
         return ResponseEntity.ok(frontendResumeRequestDto);
 
     }

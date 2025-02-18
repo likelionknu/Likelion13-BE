@@ -1,11 +1,12 @@
 package com.springboot.jwt.resume.service;
 
+import com.springboot.jwt.resume.dto.DesignResumeRequestDto;
 import com.springboot.jwt.resume.dto.FrontendResumeRequestDto;
 
 public interface FrontendResumeService {
     void frontendCreateResume(FrontendResumeRequestDto frontendResumeRequestDto);
-    void frontendUpdateResume(Long id, FrontendResumeRequestDto frontendResumeRequestDto);
-    FrontendResumeRequestDto frontendGetResumeById(Long id);
+    void frontendUpdateResume(String studentId, FrontendResumeRequestDto frontendResumeRequestDto);
+    FrontendResumeRequestDto frontendGetResumeById(String studentId);
 
-    FrontendResumeRequestDto updateResumeStatus(Long id, boolean apply);
+    FrontendResumeRequestDto updateResumeStatus(String studentId, boolean apply);
 }
