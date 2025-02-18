@@ -32,7 +32,9 @@ public class BackendResumeServiceImpl implements BackendResumeService {
             throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
         }
 
-        BackendResume backendResume = new BackendResume();
+        BackendResume backendResume = backendResumeRepository.findByUser(user)
+                .orElseGet(BackendResume::new);
+        
         backendResume.setUser(user);
         backendResume.setName(backendResumeRequestDto.getName());
         backendResume.setBackendcontent1(backendResumeRequestDto.getBackendcontent1());

@@ -2,6 +2,7 @@ package com.springboot.jwt.resume.service.Impl;
 
 import com.springboot.jwt.resume.dto.DesignResumeRequestDto;
 import com.springboot.jwt.resume.dto.FrontendResumeRequestDto;
+import com.springboot.jwt.resume.entity.BackendResume;
 import com.springboot.jwt.resume.entity.DesignResume;
 import com.springboot.jwt.resume.entity.FrontendResume;
 import com.springboot.jwt.resume.repository.FrontendResumeRepository;
@@ -34,7 +35,9 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
             throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
         }
 
-        FrontendResume frontendResume = new FrontendResume();
+        FrontendResume frontendResume = frontendResumeRepository.findByUser(user)
+                .orElseGet(FrontendResume::new);
+
         frontendResume.setUser(user);
         frontendResume.setName(frontendResumeRequestDto.getName());
         frontendResume.setFrontendcontent1(frontendResumeRequestDto.getFrontendcontent1());

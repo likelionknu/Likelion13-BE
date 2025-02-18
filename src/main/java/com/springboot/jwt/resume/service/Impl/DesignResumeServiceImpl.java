@@ -34,7 +34,9 @@ public class DesignResumeServiceImpl implements DesignResumeService {
             throw new IllegalArgumentException("하나의 파트만 지원이 가능합니다.");
         }
 
-        DesignResume designResume = new DesignResume();
+        DesignResume designResume = designResumeRepository.findByUser(user)
+                .orElseGet(DesignResume::new);
+
         designResume.setUser(user);
         designResume.setName(designResumeRequestDto.getName());
         designResume.setDesigncontent1(designResumeRequestDto.getDesigncontent1());
