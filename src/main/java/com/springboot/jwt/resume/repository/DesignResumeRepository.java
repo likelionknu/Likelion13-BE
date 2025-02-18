@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface DesignResumeRepository extends JpaRepository<DesignResume, Long> {
     Optional<DesignResume> findById(Long id);
     List<DesignResume> findAllByApply(boolean apply);
-    Optional<Result> findByUser(User user);
+    Optional<DesignResume> findByUser(User user);
 }

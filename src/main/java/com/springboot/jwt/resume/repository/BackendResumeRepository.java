@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface BackendResumeRepository extends JpaRepository<BackendResume, Long> {
     Optional<BackendResume> findById(Long id);
     List<BackendResume> findAllByApply(boolean apply);
-    Optional<Result> findByUser(User user);
+    Optional<BackendResume> findByUser(User user);
 }
