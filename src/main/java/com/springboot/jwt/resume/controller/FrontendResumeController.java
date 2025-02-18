@@ -34,23 +34,23 @@ public class FrontendResumeController {
     }
 
     @GetMapping("/view")
-    public ResponseEntity<FrontendResumeRequestDto> viewResume(@RequestParam Long id) {
-        FrontendResumeRequestDto frontendResumeRequestDto = frontendResumeService.frontendGetResumeById(id);
+    public ResponseEntity<FrontendResumeRequestDto> viewResume(@RequestParam String studentId) {
+        FrontendResumeRequestDto frontendResumeRequestDto = frontendResumeService.frontendGetResumeById(studentId);
         return ResponseEntity.ok(frontendResumeRequestDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{studentId}")
     public ResponseEntity<Void> frontendUpdateResume(
-            @PathVariable Long id,
+            @RequestParam String studentId,
             @RequestBody FrontendResumeRequestDto frontendResumeRequestDto) {
-        frontendResumeService.frontendUpdateResume(id, frontendResumeRequestDto);
+        frontendResumeService.frontendUpdateResume(studentId, frontendResumeRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /* 최종 제출 */
-    @PutMapping("/frontend/submit/{id}")
-    public ResponseEntity<FrontendResumeRequestDto> submitResume(@PathVariable Long id) {
-        FrontendResumeRequestDto updatedResume = frontendResumeService.updateResumeStatus(id, true);
+    @PutMapping("/frontend/submit/{studentId}")
+    public ResponseEntity<FrontendResumeRequestDto> submitResume(@RequestParam String studentId) {
+        FrontendResumeRequestDto updatedResume = frontendResumeService.updateResumeStatus(studentId, true);
         return ResponseEntity.ok(updatedResume);
     }
 }

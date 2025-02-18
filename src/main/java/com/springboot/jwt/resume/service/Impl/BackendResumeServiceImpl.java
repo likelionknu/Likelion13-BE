@@ -53,8 +53,8 @@ public class BackendResumeServiceImpl implements BackendResumeService {
 
 
     @Override
-    public BackendResumeRequestDto backendGetResumeById(Long id) {
-        return backendResumeRepository.findById(id)
+    public BackendResumeRequestDto backendGetResumeById(String studentId) {
+        return backendResumeRepository.findByUser_StudentId(studentId)
                 .map(backendResume -> new BackendResumeRequestDto(
                         backendResume.getId(),
                         backendResume.getUser() != null ? backendResume.getUser().getStudentId() :  null,
@@ -75,8 +75,8 @@ public class BackendResumeServiceImpl implements BackendResumeService {
     }
 
     @Override
-    public void backendUpdateResume(Long id, BackendResumeRequestDto backendResumeRequestDto) {
-        BackendResume backendResume = backendResumeRepository.findById(id)
+    public void backendUpdateResume(String studentId, BackendResumeRequestDto backendResumeRequestDto) {
+        BackendResume backendResume = backendResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
 
         User user = userRepository.findByStudentId(backendResumeRequestDto.getStudentId())
@@ -113,8 +113,8 @@ public class BackendResumeServiceImpl implements BackendResumeService {
         return ResumedtoList;
     }
 
-    public BackendResumeRequestDto updateResumeStatus(Long id, boolean apply) {
-        BackendResume backendResume = backendResumeRepository.findById(id)
+    public BackendResumeRequestDto updateResumeStatus(String studentId, boolean apply) {
+        BackendResume backendResume = backendResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
         backendResume.setApply(apply);
 

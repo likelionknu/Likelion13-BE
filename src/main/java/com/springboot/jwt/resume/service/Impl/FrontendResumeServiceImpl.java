@@ -55,8 +55,8 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
 
 
     @Override
-    public FrontendResumeRequestDto frontendGetResumeById(Long id) {
-        return frontendResumeRepository.findById(id)
+    public FrontendResumeRequestDto frontendGetResumeById(String studentId) {
+        return frontendResumeRepository.findByUser_StudentId(studentId)
                 .map(frontendResume -> new FrontendResumeRequestDto(
                         frontendResume.getId(),
                         frontendResume.getUser() != null ? frontendResume.getUser().getStudentId(): null,
@@ -76,8 +76,8 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
     }
 
     @Override
-    public void frontendUpdateResume(Long id, FrontendResumeRequestDto frontendResumeRequestDto) {
-        FrontendResume frontendResume = frontendResumeRepository.findById(id)
+    public void frontendUpdateResume(String studentId, FrontendResumeRequestDto frontendResumeRequestDto) {
+        FrontendResume frontendResume = frontendResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
 
         User user = userRepository.findByStudentId(frontendResumeRequestDto.getStudentId())
@@ -110,8 +110,8 @@ public class FrontendResumeServiceImpl implements FrontendResumeService {
         return ResumedtoList;
     }
 
-    public FrontendResumeRequestDto updateResumeStatus(Long id, boolean apply) {
-        FrontendResume frontendResume = frontendResumeRepository.findById(id)
+    public FrontendResumeRequestDto updateResumeStatus(String studentId, boolean apply) {
+        FrontendResume frontendResume = frontendResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
         frontendResume.setApply(apply);
 

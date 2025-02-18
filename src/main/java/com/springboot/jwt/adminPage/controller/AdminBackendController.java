@@ -26,9 +26,9 @@ public class AdminBackendController {
         this.userListService = userListService;
     }
 
-    @GetMapping("/admin/userform/backend/{id}")
-    public ResponseEntity<BackendResumeRequestDto> showBackendResume(@PathVariable Long id){
-        BackendResumeRequestDto backendResumeRequestDto = backendResumeService.backendGetResumeById(id);
+    @GetMapping("/admin/userform/backend/{studentId}")
+    public ResponseEntity<BackendResumeRequestDto> showBackendResume(@RequestParam String studentId){
+        BackendResumeRequestDto backendResumeRequestDto = backendResumeService.backendGetResumeById(studentId);
         return ResponseEntity.ok(backendResumeRequestDto);
     }
 

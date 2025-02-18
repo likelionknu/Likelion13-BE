@@ -23,9 +23,9 @@ public class AdminDesignResumeController {
         this.designResumeService = designResumeService;
         this.userListService = userListService;
     }
-    @GetMapping("/admin/userform/design/{id}")
-    public ResponseEntity<DesignResumeRequestDto> showDesignResume(@PathVariable Long id){
-        DesignResumeRequestDto designResumeRequestDto = designResumeService.designGetResumeById(id);
+    @GetMapping("/admin/userform/design/{studentId}")
+    public ResponseEntity<DesignResumeRequestDto> showDesignResume(@RequestParam String studentId){
+        DesignResumeRequestDto designResumeRequestDto = designResumeService.designGetResumeById(studentId);
         return ResponseEntity.ok(designResumeRequestDto);
     }
 

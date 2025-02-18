@@ -54,8 +54,8 @@ public class DesignResumeServiceImpl implements DesignResumeService {
 
 
     @Override
-    public DesignResumeRequestDto designGetResumeById(Long id) {
-        return designResumeRepository.findById(id)
+    public DesignResumeRequestDto designGetResumeById(String studentId) {
+        return designResumeRepository.findByUser_StudentId(studentId)
                 .map(designResume -> new DesignResumeRequestDto(
                         designResume.getId(),
                         designResume.getUser() != null ? designResume.getUser().getStudentId() : null,
@@ -75,8 +75,8 @@ public class DesignResumeServiceImpl implements DesignResumeService {
     }
 
     @Override
-    public void designUpdateResume(Long id, DesignResumeRequestDto designResumeRequestDto) {
-        DesignResume designResume = designResumeRepository.findById(id)
+    public void designUpdateResume(String studentId, DesignResumeRequestDto designResumeRequestDto) {
+        DesignResume designResume = designResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("지원서를 찾을 수 없습니다."));
 
         User user = userRepository.findByStudentId(designResumeRequestDto.getStudentId())
@@ -109,8 +109,8 @@ public class DesignResumeServiceImpl implements DesignResumeService {
         return ResumedtoList;
     }
 
-    public DesignResumeRequestDto updateResumeStatus(Long id, boolean apply) {
-        DesignResume designResume = designResumeRepository.findById(id)
+    public DesignResumeRequestDto updateResumeStatus(String studentId, boolean apply) {
+        DesignResume designResume = designResumeRepository.findByUser_StudentId(studentId)
                 .orElseThrow(() -> new RuntimeException("[error] 해당 지원서를 찾을 수 없습니다."));
         designResume.setApply(apply);
 

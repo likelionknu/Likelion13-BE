@@ -36,23 +36,23 @@ public class DesignResumeController {
     }
 
     @GetMapping("/view")
-    public ResponseEntity<DesignResumeRequestDto> viewResume(@RequestParam Long id) {
-        DesignResumeRequestDto designResumeRequestDto = designResumeService.designGetResumeById(id);
+    public ResponseEntity<DesignResumeRequestDto> viewResume(@RequestParam String studentId) {
+        DesignResumeRequestDto designResumeRequestDto = designResumeService.designGetResumeById(studentId);
         return ResponseEntity.ok(designResumeRequestDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{studentId}")
     public ResponseEntity<Void> designUpdateResume(
-            @PathVariable Long id,
+            @RequestParam String studentId,
             @RequestBody DesignResumeRequestDto designResumeRequestDto) {
-        designResumeService.designUpdateResume(id, designResumeRequestDto);
+        designResumeService.designUpdateResume(studentId, designResumeRequestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /* 최종 제출 */
-    @PutMapping("/design/submit/{id}")
-    public ResponseEntity<DesignResumeRequestDto> submitResume(@PathVariable Long id) {
-        DesignResumeRequestDto updatedResume = designResumeService.updateResumeStatus(id, true);
+    @PutMapping("/design/submit/{studentId}")
+    public ResponseEntity<DesignResumeRequestDto> submitResume(@RequestParam String studentId) {
+        DesignResumeRequestDto updatedResume = designResumeService.updateResumeStatus(studentId, true);
         return ResponseEntity.ok(updatedResume);
     }
 }
