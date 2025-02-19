@@ -170,4 +170,13 @@ public class UserService {
         userRepository.deleteByEmail(email);
         return true;
     }
+
+    @Transactional
+    public boolean updatePassword(String email, String newPassword) {
+        return userRepository.findByEmail(email).map(user -> {
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        }).orElse(false);
+    }
 }

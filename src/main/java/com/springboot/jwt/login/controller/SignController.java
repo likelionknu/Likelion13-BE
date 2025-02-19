@@ -3,6 +3,7 @@ package com.springboot.jwt.login.controller;
 import com.springboot.jwt.login.dto.EmailDto;
 import com.springboot.jwt.login.dto.JoinRequest;
 import com.springboot.jwt.login.dto.LoginRequest;
+import com.springboot.jwt.login.dto.ResetPasswordRequest;
 import com.springboot.jwt.login.entity.User;
 import com.springboot.jwt.login.jwt.JwtTokenUtil;
 import com.springboot.jwt.login.service.EmailService;
@@ -153,5 +154,23 @@ public class SignController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("계정 삭제 중 오류가 발생했습니다. " + e.getMessage());
         }
+    }
+
+    @PostMapping("/password/reset")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+        log.info("비밀번호 재설정 요청: {}", request.getEmail());
+
+        // 새 비밀번호 확인
+        if (!request.getNewPassword().equals(request.getNewPasswordCheck())) {
+            return ResponseEntity.badRequest().body("새 비밀번호가 일치하지 않습니다.");
+        }
+
+        // 비밀번호 재설정 수행
+        boolean isUpdated = userService.updatePassword(request.getEmail(), request.getNewPassword());
+        if (!isUpdated) {
+            return ResponseEntity.badRequest().body("비밀번호 변경에 실패했습니다.");
+        }
+
+        return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
     }
 }
