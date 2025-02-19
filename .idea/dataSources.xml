@@ -27,7 +27,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="likelion13@svc.sel4.cloudtype.app" uuid="1de0ac68-b4f0-4b98-9e20-5e153f438fe6">
+    <data-source source="LOCAL" name="likelion13@svc.sel4.cloudtype.app" uuid="59d0b28c-62f4-4bf0-8ea0-7a9290e43f65">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

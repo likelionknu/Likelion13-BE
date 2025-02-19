@@ -52,7 +52,7 @@ public class BackendResume {
     @Column(nullable = false)
     private String backendcontent10;
 
-    private boolean apply = false;
+    private boolean apply;
     public boolean isApply() {
         return apply;
     }

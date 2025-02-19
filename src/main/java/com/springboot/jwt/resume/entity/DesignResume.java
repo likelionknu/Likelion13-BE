@@ -49,7 +49,7 @@ public class DesignResume {
     @Column(nullable = false)
     private String designcontent9;
 
-    private boolean apply = false;
+    private boolean apply;
     public boolean isApply() {
         return apply;
     }
