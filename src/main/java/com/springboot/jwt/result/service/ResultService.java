@@ -21,7 +21,8 @@ public class ResultService {
     // 합불 부여
     public Result assignResult(String studentId, ResultStatus resultStatus, String comment) {
         User user = userRepository.findByStudentId(studentId)
-                .orElseThrow(() -> new IllegalArgumentException("[error] 해당 studentId에 맞는 유저를 찾을 수 없습니다."));
+                .filter(User::isApply)
+                .orElseThrow(() -> new IllegalArgumentException("[error] 해당 학번 사용자가 존재하지 않습니다. 지원서 최종 제출 후 다시 시도해주세요."));
 
         Result result = resultRepository.findByUser(user)
                 .orElse(new Result());
