@@ -48,7 +48,7 @@ public class BackendResumeController {
     }
 
     /* 최종 제출 */
-    @PutMapping("/backend/submit/{studentId}")
+    @PutMapping("/submit/{studentId}")
     public ResponseEntity<BackendResumeRequestDto> submitResume(@RequestParam String studentId) {
         BackendResumeRequestDto updatedResume = backendResumeService.updateResumeStatus(studentId, true);
         return ResponseEntity.ok(updatedResume);

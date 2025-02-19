@@ -50,7 +50,7 @@ public class DesignResumeController {
     }
 
     /* 최종 제출 */
-    @PutMapping("/design/submit/{studentId}")
+    @PutMapping("/submit/{studentId}")
     public ResponseEntity<DesignResumeRequestDto> submitResume(@RequestParam String studentId) {
         DesignResumeRequestDto updatedResume = designResumeService.updateResumeStatus(studentId, true);
         return ResponseEntity.ok(updatedResume);
