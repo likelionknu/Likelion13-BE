@@ -5,6 +5,7 @@ import com.springboot.jwt.login.repository.UserRepository;
 import com.springboot.jwt.result.entity.Result;
 import com.springboot.jwt.result.entity.ResultStatus;
 import com.springboot.jwt.result.repository.ResultRepository;
+import com.springboot.jwt.resume.entity.BackendResume;
 import org.springframework.stereotype.Service;
 
 @Service

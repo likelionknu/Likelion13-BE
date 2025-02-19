@@ -48,7 +48,7 @@ public class FrontendResumeController {
     }
 
     /* 최종 제출 */
-    @PutMapping("/frontend/submit/{studentId}")
+    @PutMapping("/submit/{studentId}")
     public ResponseEntity<FrontendResumeRequestDto> submitResume(@RequestParam String studentId) {
         FrontendResumeRequestDto updatedResume = frontendResumeService.updateResumeStatus(studentId, true);
         return ResponseEntity.ok(updatedResume);
