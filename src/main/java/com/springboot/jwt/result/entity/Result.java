@@ -32,7 +32,6 @@ public class Result {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
-    @JsonIgnore
     private User user;
 
     private String comment; // 한줄평
