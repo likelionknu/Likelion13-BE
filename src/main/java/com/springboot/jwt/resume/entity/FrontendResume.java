@@ -49,7 +49,7 @@ public class FrontendResume {
     @Column(nullable = false)
     private String frontendcontent9;
 
-    private boolean apply = false;
+    private boolean apply;
 
     public boolean isApply() {
         return apply;
