@@ -22,34 +22,44 @@ public class BackendResume {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent1;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent2;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent3;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent4;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent5;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent6;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent7;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent8;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent9;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String backendcontent10;
 
     private boolean apply;

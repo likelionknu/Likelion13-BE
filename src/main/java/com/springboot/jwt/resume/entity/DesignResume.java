@@ -22,34 +22,44 @@ public class DesignResume {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent1;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent2;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent3;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent4;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent5;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent6;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent7;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent8;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String designcontent9;
 
     private boolean apply;
+
     public boolean isApply() {
         return apply;
     }
@@ -58,7 +68,6 @@ public class DesignResume {
     @JoinColumn(name = "student_id", referencedColumnName = "studentId", nullable = false)
     private User user;
 
-
     public DesignResume(User user) {
         this.user = user;
     }
@@ -66,5 +75,4 @@ public class DesignResume {
     public ResultStatus getResultStatus() {
         return user != null && user.getResult() != null ? user.getResult().getResultStatus() : null;
     }
-
 }

@@ -22,31 +22,40 @@ public class FrontendResume {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent1;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent2;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent3;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent4;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent5;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent6;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent7;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent8;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String frontendcontent9;
 
     private boolean apply;
